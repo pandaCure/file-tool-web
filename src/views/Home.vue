@@ -114,7 +114,7 @@ export default class Home extends Vue {
   }
   private async downloadFile () {
     const file: any = await GET('/download')
-    const blob: Blob = new Blob([file], {
+    const blob: Blob = new Blob([file.data], {
       type: 'application/zip'
     })
     FileSaver.saveAs(blob, 'title.zip')
