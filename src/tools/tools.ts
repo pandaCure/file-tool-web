@@ -3,7 +3,7 @@ interface result {
   status?: string
 }
 const baseURL = {
-  prod: 'http://127.0.0.1:5000'
+  prod: 'http://10.8.8.8:4571'
 }
 const instance = axios.create({
   baseURL: baseURL.prod,
@@ -25,14 +25,13 @@ export function GET (url: string): PromiseLike<AxiosResponse<result>> {
   return new Promise((resolve, reject) => {
     instance
       .get(url, {
-        responseType: 'arraybuffer',
         headers: {
           'Accept': 'application/zip'
         }
       })
-      .then(res => {
+      .then((res: any) => {
         resolve(res.data)
       })
-      .catch(err => reject(err))
+      .catch((err: any) => reject(err))
   })
 }
