@@ -61,7 +61,7 @@ export default class Home extends Vue {
   private handleChange (e: any): any {
     const files = e.target.files
     if (e.target.files.length <= 0) {
-      console.log('文件上传失败')
+      // console.log('文件上传失败')
       return false
     }
     this.uploadFiles(files)
@@ -81,15 +81,10 @@ export default class Home extends Vue {
   private async upload () {
     const formData = new FormData()
     const config = {
-      onUploadProgress: (progress: any) => {
-        console.log(progress)
-        console.log(progress.loaded)
-        console.log(progress.total)
-        console.log(progress.loaded / progress.total)
-      }
+      onUploadProgress: (progress: any) => {}
     }
     if (this.fileList.length <= 0) {
-      console.log('请上传文件')
+      // console.log('请上传文件')
       this.download = false
       return false
     }
@@ -100,7 +95,7 @@ export default class Home extends Vue {
     if (result && result.data.status === 'ok') {
       this.download = true
     } else {
-      console.log('上传失败')
+      // console.log('上传失败')
     }
     this.$refs.input.value = null
     this.fileList = []
@@ -120,8 +115,8 @@ export default class Home extends Vue {
   private async downloadFile () {
     const file: any = await GET('/download')
     const blob: Blob = new Blob([file], {
-          type: 'application/zip'
-        })
+      type: 'application/zip'
+    })
     FileSaver.saveAs(blob, 'title.zip')
   }
 }
