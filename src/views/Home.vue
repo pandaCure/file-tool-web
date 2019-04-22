@@ -21,6 +21,9 @@
       <li @click="upload" class="button-upload">上传</li>
       <li @click="downloadFile" class="button-download" :class="{'blue-bg': download}">下载</li>
     </ul>
+    <div class="modal" @click="cancalModal">
+      <div class="modal-text">文件加入成功，请点击上传按钮，进行上传</div>
+    </div>
   </div>
 </template>
 
@@ -47,6 +50,7 @@ export default class Home extends Vue {
   private accept: string = 'srt, zip'
   private fileList: Array<fileType> = []
   private download: boolean = false
+  private modal: boolean = false
   $refs!: {
     input: any
   }
@@ -56,10 +60,12 @@ export default class Home extends Vue {
   private onDrop (e: any): void {
     const files = e.dataTransfer.files
     this.dragover = false
+    this.modal = true
     this.uploadFiles(files)
   }
   private handleChange (e: any): any {
     const files = e.target.files
+    this.modal = true
     if (e.target.files.length <= 0) {
       // console.log('文件上传失败')
       return false
@@ -119,6 +125,9 @@ export default class Home extends Vue {
     })
     FileSaver.saveAs(blob, 'title.zip')
   }
+  private cancalModal () {
+    this.modal = false
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -175,6 +184,20 @@ export default class Home extends Vue {
     }
     .blue-bg {
       background-color: #409eff;
+    }
+  }
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .6);
+    .modal-text {
+      color: white;
     }
   }
 </style>

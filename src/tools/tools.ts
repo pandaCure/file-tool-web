@@ -3,7 +3,7 @@ interface result {
   status?: string
 }
 const baseURL = {
-  prod: 'http://127.0.0.1:4571'
+  prod: 'http://10.8.8.8:4571'
 }
 const instance = axios.create({
   baseURL: baseURL.prod,
