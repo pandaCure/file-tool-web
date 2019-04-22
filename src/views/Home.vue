@@ -21,7 +21,7 @@
       <li @click="upload" class="button-upload">上传</li>
       <li @click="downloadFile" class="button-download" :class="{'blue-bg': download}">下载</li>
     </ul>
-    <div class="modal" @click="cancalModal">
+    <div class="modal" @click="cancalModal" :class="{modalshow: modal}">
       <div class="modal-text">文件加入成功，请点击上传按钮，进行上传</div>
     </div>
   </div>
@@ -199,5 +199,8 @@ export default class Home extends Vue {
     .modal-text {
       color: white;
     }
+  }
+  .modalshow {
+    display: none;
   }
 </style>
